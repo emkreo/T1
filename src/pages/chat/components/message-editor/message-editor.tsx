@@ -4,6 +4,7 @@ import * as React from 'react';
 import './message-editor.css'
 
 import { TextInput, Button } from '../../../../components';
+import {flushSync} from "react-dom";
 
 
 
@@ -13,6 +14,7 @@ interface Props {
 
 interface State {
   message: string;
+  disabled: boolean;
 }
 
 export class MessageEditor extends React.Component<Props, State> {
@@ -20,6 +22,7 @@ export class MessageEditor extends React.Component<Props, State> {
     super(props);
     this.state = {
       message: '',
+      disabled: false
     }
   }
   
@@ -27,7 +30,7 @@ export class MessageEditor extends React.Component<Props, State> {
     return (
       <div className='message-editor'>
         <TextInput value={this.state.message} onChange={this.onMessageChange}/>
-        <Button text='Send Message' onClick={this.sendMessage} />
+        <Button disabled={this.state.disabled} text='Send Message' onClick={this.sendMessage} />
       </div>
     )
   }
@@ -35,12 +38,19 @@ export class MessageEditor extends React.Component<Props, State> {
   @autobind
   private onMessageChange(event: any): void {
     console.log(event);
+    if(event.target.value.trim() !== '') {
+      this.setState({disabled: true});
+    }
     this.setState({ message: event.target.value });
   }
 
   @autobind
   private sendMessage(): void {
-    this.props.sendMessage(this.state.message);
+    if(this.state.disabled) {
+      this.props.sendMessage(this.state.message);
+      this.setState({ message: '' });
+      this.setState({disabled: false});
+    }
     this.setState({ message: '' });
   }
 }
