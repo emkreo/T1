@@ -13,7 +13,6 @@ interface Props {
 export class ChatListItem extends React.Component<Props> {
   public render(): JSX.Element {
     const { chatInfo, isSelected } = this.props;
-    
     const className = `chat-list-item ${isSelected ? 'selected' : null}`
 
     return (

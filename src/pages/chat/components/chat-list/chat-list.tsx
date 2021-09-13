@@ -8,7 +8,7 @@ import { ChatListItem } from './chat-list-item';
 
 interface Props {
   chats: Chat[];
-  selectdChatId: number;
+  selectdChatId: number | null;
   onChatClick: (chatId: number) => void;
 }
 

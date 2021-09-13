@@ -1,6 +1,7 @@
 export interface ChatInfo {
   id: number;
   name: string;
+  // isShow: boolean
 }
 
 export interface ChatMessage {

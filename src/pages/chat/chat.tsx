@@ -1,15 +1,15 @@
 import autobind from 'autobind-decorator';
 import * as React from 'react';
 
-import './chat.css'
+import './chat.css';
 
-import { ChatList, MessageEditor, MessageList } from './components';
-import { InitialData } from '../../initial-data';
-import { Chat } from '../../interfaces/chat';
+import {ChatList, MessageEditor, MessageList} from './components';
+import {InitialData} from '../../initial-data';
+import {Chat} from '../../interfaces/chat';
 
 
 interface State {
-  selectdChatId: number;
+  selectdChatId: number | null;
   chats: Chat[];
 }
 
@@ -20,9 +20,9 @@ export class ChatPage extends React.Component<{}, State> {
   }
 
   public render(): JSX.Element {
-    const { chats, selectdChatId } = this.state;
+    const {chats, selectdChatId} = this.state;
+
     const messages = chats.find(x => x.info.id === selectdChatId)?.messages || [];
-    
 
     return (
       <div className='chat-page'>
@@ -31,30 +31,37 @@ export class ChatPage extends React.Component<{}, State> {
           onChatClick={this.selectChat}
           selectdChatId={selectdChatId}
         />
-        <div className='chatting-zone'>
-          <MessageList messages={messages}/>
-          <MessageEditor sendMessage={this.sendMessage} /> 
-        </div>
+        {
+          selectdChatId &&
+          <div className='chatting-zone'>
+            <MessageList messages={messages}/>
+            <MessageEditor sendMessage={this.sendMessage}/>
+          </div>
+        }
       </div>
     )
   }
 
   @autobind
   private selectChat(selectdChatId: number): void {
-    this.setState({ selectdChatId })
+    if (selectdChatId === this.state.selectdChatId) {
+      this.setState({selectdChatId: null});
+    } else {
+      this.setState({selectdChatId: selectdChatId});
+    }
   }
 
   @autobind
   private sendMessage(text: string): void {
-    const { chats, selectdChatId } = this.state;
+    const {chats, selectdChatId} = this.state;
     const currentChatIndex = chats.findIndex(x => x.info.id === selectdChatId);
     if (currentChatIndex === -1) {
       return;
     }
 
     const updatedChats = chats.slice();
-    updatedChats[currentChatIndex].messages.push({ outcomming: true, text });
-    
-    this.setState({ chats: updatedChats })
+    updatedChats[currentChatIndex].messages.push({outcomming: true, text});
+
+    this.setState({chats: updatedChats});
   }
 }
