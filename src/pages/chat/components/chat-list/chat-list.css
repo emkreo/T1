@@ -1,0 +1,15 @@
+.chat-list {
+  width: 350px;
+  background: cadetblue;
+}
+ .chat-list-item {
+   background-color: blanchedalmond;
+   margin: 5px;
+   display: flex;
+   padding-left: 10px;
+   cursor: pointer;
+ }
+ 
+ .chat-list-item.selected {
+  background-color: brown;
+}

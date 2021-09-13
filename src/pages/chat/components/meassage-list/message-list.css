@@ -1,0 +1,28 @@
+.message-list {
+  background: gainsboro;
+  height: calc(100% - 200px);
+  overflow: auto;
+}
+
+.message {
+  margin: 10px;
+  display: flex;
+  text-align: start;
+  word-break: break-word;
+}
+
+.message-text {
+  background: gold;
+  padding: 10px;
+  max-width: 600px;
+  border-radius: 15px;
+}
+
+.message.message--outcomming {
+  text-align: end;
+  flex-direction: row-reverse;
+}
+
+.message--outcomming > .message-text {
+  background-color: seagreen;
+}

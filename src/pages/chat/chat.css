@@ -1,0 +1,11 @@
+.chat-page {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: 100%;
+}
+
+.chatting-zone {
+  width: 100%;
+}
