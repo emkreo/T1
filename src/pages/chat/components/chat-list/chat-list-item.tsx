@@ -1,8 +1,8 @@
 import autobind from 'autobind-decorator';
 import * as React from 'react';
 
-import { Text } from '../../../../components'
-import { ChatInfo } from '../../../../interfaces/chat';
+import {Text} from '../../../../components';
+import {ChatInfo} from '../../../../interfaces/chat';
 
 interface Props {
   chatInfo: ChatInfo;
@@ -12,7 +12,7 @@ interface Props {
 
 export class ChatListItem extends React.Component<Props> {
   public render(): JSX.Element {
-    const { chatInfo, isSelected } = this.props;
+    const {chatInfo, isSelected} = this.props;
     const className = `chat-list-item ${isSelected ? 'selected' : null}`;
 
     return (
@@ -24,7 +24,7 @@ export class ChatListItem extends React.Component<Props> {
 
   @autobind
   private onClick(): void {
-    const { onClick, chatInfo } = this.props;
+    const {onClick, chatInfo} = this.props;
     onClick(chatInfo.id);
   }
 }

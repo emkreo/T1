@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {ChangeEvent} from 'react';
 import './searchItem.css';
-import autobind from "autobind-decorator";
+import autobind from 'autobind-decorator';
 
 
 interface PropsSearchPlugin {
-  searchText: (inputValue: string) => any;
+  searchText: (inputValue: string) => void;
 }
 
 interface State {
@@ -35,12 +35,16 @@ export class SearchItem extends React.Component<PropsSearchPlugin, State> {
 
   public render(): JSX.Element {
     return (
-      <div className="form">
-        <input
-          value={this.state.inputValue}
-          onChange={this.findOnText} type="text"
-          placeholder="Search here..."
-        />
+      <div className="wrap">
+        <div className="search">
+          <input
+            type="text"
+            className="search-text"
+            onChange={this.findOnText}
+            value={this.state.inputValue}
+            placeholder="Search here..."
+          />
+        </div>
       </div>
     )
   }

@@ -29,6 +29,10 @@
     color: black;
 }
 
+.size-large {
+    font-size: 28pt;
+}
+
 @keyframes app-logo-spin {
     from {
         transform: rotate(0deg);

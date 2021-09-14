@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import './chat-list.css';
 
-import { Chat } from '../../../../interfaces/chat';
-import { ChatListItem } from './chat-list-item';
+import {Chat} from '../../../../interfaces/chat';
+import {ChatListItem} from './chat-list-item';
 
 
 interface Props {
@@ -14,8 +14,8 @@ interface Props {
 
 export class ChatList extends React.Component<Props> {
   public render(): JSX.Element {
-    const { chats, selectedChatId, onChatClick } = this.props;
-    
+    const {chats, selectedChatId, onChatClick} = this.props;
+
     return (
       <div className='chat-list'>
         {chats.map(chat => (
