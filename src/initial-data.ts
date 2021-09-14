@@ -46,6 +46,7 @@ export const InitialData = {
       ]
     }
   ],
-  selectdChatId: 2,
-
+  selectedChatId: 2,
 }
+
+

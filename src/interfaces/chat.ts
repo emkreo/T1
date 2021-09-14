@@ -7,6 +7,7 @@ export interface ChatInfo {
 export interface ChatMessage {
   text: string;
   outcomming: boolean;
+  match?: boolean
 }
 
 export interface Chat {

@@ -8,4 +8,5 @@
 
 .chatting-zone {
   width: 100%;
+  position: relative;
 }

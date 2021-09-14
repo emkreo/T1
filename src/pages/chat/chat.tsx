@@ -5,38 +5,44 @@ import './chat.css';
 
 import {ChatList, MessageEditor, MessageList} from './components';
 import {InitialData} from '../../initial-data';
-import {Chat} from '../../interfaces/chat';
-import {ItemsList} from "../../search/itemsList";
+import {Chat, ChatMessage} from '../../interfaces/chat';
+import {SearchItem} from "../../search/searchItem";
 
 
 interface State {
-  selectdChatId: number | null;
+  selectedChatId: number | null;
   chats: Chat[];
 }
 
 export class ChatPage extends React.Component<{}, State> {
+  messages: ChatMessage[] = [];
+
   constructor(props: {}) {
     super(props);
     this.state = InitialData;
   }
 
-  public render(): JSX.Element {
-    const {chats, selectdChatId} = this.state;
 
-    const messages = chats.find(x => x.info.id === selectdChatId)?.messages || [];
+  public render(): JSX.Element {
+    const {chats, selectedChatId} = this.state;
+
+    this.messages = chats.find(x => x.info.id === selectedChatId)?.messages || [];
+    this.messages = this.messages.map(el => {
+      return {...el, match: false}
+    });
 
     return (
       <div className='chat-page'>
         <ChatList
           chats={chats}
           onChatClick={this.selectChat}
-          selectdChatId={selectdChatId}
+          selectedChatId={selectedChatId}
         />
         {
-          selectdChatId &&
+          selectedChatId &&
           <div className='chatting-zone'>
-            <ItemsList  />
-            <MessageList messages={messages}/>
+            <SearchItem searchText={this.searchText}/>
+            <MessageList messages={this.messages}/>
             <MessageEditor sendMessage={this.sendMessage}/>
           </div>
         }
@@ -45,18 +51,49 @@ export class ChatPage extends React.Component<{}, State> {
   }
 
   @autobind
-  private selectChat(selectdChatId: number): void {
-    if (selectdChatId === this.state.selectdChatId) {
-      this.setState({selectdChatId: null});
+  searchText(inputText: string) {
+    // debugger
+
+
+    this.messages.forEach(el => {
+      if (el.text.indexOf(inputText) !== -1) {
+        el.match = true
+      }
+    });
+
+    // this.messages = this.messages.find(message=> message.match === true)
+
+
+    console.log("444444" + this.messages)
+    console.log("555555" + this.state)
+
+    const newState = {
+      ...this.state,
+      chats: this.state.chats.map((ch) => {
+        if (ch.info.id === this.state.selectedChatId) {
+          return {...ch, messages: this.messages }
+        } else {
+          return ch
+        }
+      })
+    }
+
+    this.setState(newState);
+  }
+
+  @autobind
+  private selectChat(selectedChatId: number): void {
+    if (selectedChatId === this.state.selectedChatId) {
+      this.setState({selectedChatId: null});
     } else {
-      this.setState({selectdChatId: selectdChatId});
+      this.setState({selectedChatId: selectedChatId});
     }
   }
 
   @autobind
   private sendMessage(text: string): void {
-    const {chats, selectdChatId} = this.state;
-    const currentChatIndex = chats.findIndex(x => x.info.id === selectdChatId);
+    const {chats, selectedChatId} = this.state;
+    const currentChatIndex = chats.findIndex(x => x.info.id === selectedChatId);
     if (currentChatIndex === -1) {
       return;
     }
