@@ -6,7 +6,7 @@ import './chat.css';
 import {ChatList, MessageEditor, MessageList} from './components';
 import {InitialData} from '../../initial-data';
 import {Chat, ChatMessage} from '../../interfaces/chat';
-import {SearchItem} from "../../search/searchItem";
+import {SearchItem} from '../../search/searchItem';
 
 
 interface State {
@@ -22,14 +22,10 @@ export class ChatPage extends React.Component<{}, State> {
     this.state = InitialData;
   }
 
-
   public render(): JSX.Element {
     const {chats, selectedChatId} = this.state;
 
     this.messages = chats.find(x => x.info.id === selectedChatId)?.messages || [];
-    this.messages = this.messages.map(el => {
-      return {...el, match: false}
-    });
 
     return (
       <div className='chat-page'>
@@ -52,32 +48,31 @@ export class ChatPage extends React.Component<{}, State> {
 
   @autobind
   searchText(inputText: string) {
-    // debugger
-
-
-    this.messages.forEach(el => {
-      if (el.text.indexOf(inputText) !== -1) {
-        el.match = true
-      }
-    });
-
-    // this.messages = this.messages.find(message=> message.match === true)
-
-
-    console.log("444444" + this.messages)
-    console.log("555555" + this.state)
+    if (inputText) {
+      this.messages.forEach(el => {
+        if (el.text.indexOf(inputText) !== -1) {
+          el.match = true
+        }
+        if (!inputText) {
+          el.match = false
+        }
+      });
+    } else {
+      this.messages.forEach(el => {
+        el.match = false
+      });
+    }
 
     const newState = {
       ...this.state,
-      chats: this.state.chats.map((ch) => {
-        if (ch.info.id === this.state.selectedChatId) {
-          return {...ch, messages: this.messages }
+      chats: this.state.chats.map((chat) => {
+        if (chat.info.id === this.state.selectedChatId) {
+          return {...chat, messages: this.messages}
         } else {
-          return ch
+          return chat
         }
       })
     }
-
     this.setState(newState);
   }
 
@@ -99,7 +94,7 @@ export class ChatPage extends React.Component<{}, State> {
     }
 
     const updatedChats = chats.slice();
-    updatedChats[currentChatIndex].messages.push({outcomming: true, text});
+    updatedChats[currentChatIndex].messages.push({outcomming: true, text, match: false});
 
     this.setState({chats: updatedChats});
   }

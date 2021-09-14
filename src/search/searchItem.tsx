@@ -5,43 +5,43 @@ import autobind from "autobind-decorator";
 
 
 interface PropsSearchPlugin {
-  searchText: (inputValue: string)=> any;
+  searchText: (inputValue: string) => any;
 }
+
 interface State {
   inputValue: string;
+  math: boolean;
 }
 
 export class SearchItem extends React.Component<PropsSearchPlugin, State> {
-
-
-  filterList(text: any){
-
+  constructor(props: PropsSearchPlugin) {
+    super(props);
+    this.state = {inputValue: '', math: false};
   }
 
   @autobind
   findOnText(e: ChangeEvent<HTMLInputElement>) {
+    let inputValue = e.target.value;
 
-      let inputValue = e.target.value
-    this.setState({inputValue})
-
+    if (inputValue) {
+      this.props.searchText(inputValue.trim());
+      this.setState({inputValue});
+    } else {
+      this.props.searchText(inputValue.trim());
+      this.setState({inputValue: ''});
+      this.setState({math: false});
+    }
   }
 
-  @autobind
-  clickSearch() {
-    // const {inputValue} = this.state
-      this.props.searchText(this.state?.inputValue)
-
-    console.log(this.state?.inputValue)
-
-  }
-
-
-  public render() {
-    return(
-        <div className="form">
-          <input onChange={this.findOnText} type="text" placeholder="Search here..."/>
-          <button onClick={this.clickSearch} type="button"></button>
-        </div>
+  public render(): JSX.Element {
+    return (
+      <div className="form">
+        <input
+          value={this.state.inputValue}
+          onChange={this.findOnText} type="text"
+          placeholder="Search here..."
+        />
+      </div>
     )
   }
 }

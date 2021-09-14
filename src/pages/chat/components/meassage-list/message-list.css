@@ -17,8 +17,9 @@
   max-width: 600px;
   border-radius: 15px;
 }
-.match {
+.match span {
   background-color: crimson;
+  border-radius: 8px;
 }
 
 .message.message--outcomming {
