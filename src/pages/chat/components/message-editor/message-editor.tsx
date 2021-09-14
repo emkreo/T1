@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import * as React from 'react';
 import {ChangeEvent} from 'react';
 
-import './message-editor.css'
+import './message-editor.css';
 
 import {Button, TextInput} from '../../../../components';
 

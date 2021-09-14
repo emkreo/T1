@@ -5,6 +5,7 @@ import './App.css';
 import logo from './logo.svg';
 import {ChatPage} from './pages';
 import {ModeSwitch} from './mode-switch/modeSwitch';
+import {APP_CONTENT, APP_CONTENT_SIZE_LARGE, LOGO} from "./constants";
 
 function App() {
   const [inputNormalIsOn, setInputNormalIsOn] = useState<boolean>(false);
@@ -22,13 +23,13 @@ function App() {
   return (
     <div className='app'>
       <header className='app-header'>
-        <img src={logo} className='app-logo' alt='logo'/>
+        <img src={logo} className='app-logo' alt={LOGO}/>
         <ModeSwitch
           modeSwitchNormalSizePage={modeSwitchNormalSizePage}
           modeSwitchLargeSizePage={modeSwitchLargeSizePage}
         />
       </header>
-      <div className={inputLargeIsOn ? 'app-content + size-large' : 'app-content'}>
+      <div className={inputLargeIsOn ? APP_CONTENT_SIZE_LARGE : APP_CONTENT}>
         <ChatPage/>
       </div>
     </div>
