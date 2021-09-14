@@ -6,6 +6,7 @@ import './chat.css';
 import {ChatList, MessageEditor, MessageList} from './components';
 import {InitialData} from '../../initial-data';
 import {Chat} from '../../interfaces/chat';
+import {ItemsList} from "../../search/itemsList";
 
 
 interface State {
@@ -34,6 +35,7 @@ export class ChatPage extends React.Component<{}, State> {
         {
           selectdChatId &&
           <div className='chatting-zone'>
+            <ItemsList  />
             <MessageList messages={messages}/>
             <MessageEditor sendMessage={this.sendMessage}/>
           </div>

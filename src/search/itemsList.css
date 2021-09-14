@@ -1,0 +1,55 @@
+* {box-sizing: border-box;}
+form {
+    /*position: relative;*/
+    /*width: 300px;*/
+    /*margin: 0 auto;*/
+    /*height: 42px;*/
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    height: 42px;
+    background-color: gainsboro;
+
+}
+input {
+    height: 42px;
+    width: 0;
+    padding: 0 42px 0 15px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    outline: none;
+    background: transparent;
+    transition: .4s cubic-bezier(0, 0.8, 0, 1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+input:focus {
+    width: 300px;
+    z-index: 1;
+    border-bottom: none;
+}
+button {
+    /*-moz-osx-font-smoothing: grayscale;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    background: royalblue;
+    border: none;
+    height: 42px;
+    width: 42px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+button:before {
+    content: "\f002";
+
+    background-image:  url("../asseds/icons/icon-search.svg");
+    background-repeat: no-repeat;
+
+    font-family: FontAwesome;
+    font-size: 30px;
+    /*border: none;*/
+    /*color: #F9F0DA;*/
+}
