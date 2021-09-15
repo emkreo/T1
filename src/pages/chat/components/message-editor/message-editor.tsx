@@ -1,10 +1,10 @@
 import autobind from 'autobind-decorator';
 import * as React from 'react';
+import {ChangeEvent} from 'react';
 
-import './message-editor.css'
+import './message-editor.css';
 
-import { TextInput, Button } from '../../../../components';
-
+import {Button, TextInput} from '../../../../components';
 
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 
 interface State {
   message: string;
+  disabled: boolean;
 }
 
 export class MessageEditor extends React.Component<Props, State> {
@@ -20,27 +21,38 @@ export class MessageEditor extends React.Component<Props, State> {
     super(props);
     this.state = {
       message: '',
+      disabled: false
     }
   }
-  
+
   public render(): JSX.Element {
     return (
       <div className='message-editor'>
         <TextInput value={this.state.message} onChange={this.onMessageChange}/>
-        <Button text='Send Message' onClick={this.sendMessage} />
+        <Button
+          disabled={this.state.disabled}
+          text='Send Message'
+          onClick={this.sendMessage}
+        />
       </div>
     )
   }
 
   @autobind
-  private onMessageChange(event: any): void {
-    console.log(event);
-    this.setState({ message: event.target.value });
+  private onMessageChange(event: ChangeEvent<any>): void {
+    if (event.target.value.trim() !== '') {
+      this.setState({disabled: true});
+    }
+    this.setState({message: event.target.value});
   }
 
   @autobind
   private sendMessage(): void {
-    this.props.sendMessage(this.state.message);
-    this.setState({ message: '' });
+    if (this.state.disabled) {
+      this.props.sendMessage(this.state.message);
+      this.setState({message: ''});
+      this.setState({disabled: false});
+    }
+    this.setState({message: ''});
   }
 }

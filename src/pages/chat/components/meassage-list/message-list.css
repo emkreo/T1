@@ -17,6 +17,10 @@
   max-width: 600px;
   border-radius: 15px;
 }
+.match span {
+  background-color: crimson;
+  border-radius: 8px;
+}
 
 .message.message--outcomming {
   text-align: end;
