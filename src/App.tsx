@@ -4,7 +4,7 @@ import './App.css';
 
 import logo from './logo.svg';
 import {ChatPage} from './pages';
-import {ModeSwitch} from './mode-switch/modeSwitch';
+import {ModeSwitch} from './components/mode-switch/modeSwitch';
 import {APP_CONTENT, APP_CONTENT_SIZE_LARGE, LOGO} from "./constants";
 
 function App() {

@@ -6,7 +6,7 @@ import './chat.css';
 import {ChatList, MessageEditor, MessageList} from './components';
 import {InitialData} from '../../initial-data';
 import {Chat, ChatMessage} from '../../interfaces/chat';
-import {SearchItem} from '../../search/searchItem';
+import {SearchItem} from './components/search/searchItem';
 
 
 interface State {
@@ -52,8 +52,7 @@ export class ChatPage extends React.Component<{}, State> {
       this.messages.forEach(el => {
         if (el.text.indexOf(inputText) !== -1) {
           el.match = true
-        }
-        if (!inputText) {
+        } else {
           el.match = false
         }
       });
