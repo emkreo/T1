@@ -2,27 +2,43 @@ import * as React from 'react';
 
 import './message-list.css';
 
-import { ChatMessage } from '../../../../interfaces/chat';
-import { Message } from './message';
+import {ChatMessage} from '../../../../interfaces/chat';
+import {Message} from './message';
+
 
 
 interface Props {
-  messages: ChatMessage[];
+    messages: ChatMessage[];
 }
 
-export class MessageList extends React.Component<Props> {
-  public render(): JSX.Element {
-    const { messages } = this.props;
-    
-    return (
-      <div className='message-list'>
-        {messages && messages.map(message => (
-          <Message
-            outcomming={message.outcomming}
-            text={message.text}
-          />
-        ))}
-      </div>
-    )
-  }
+export class MessageList extends React.Component<Props, any> {
+    state = {
+        searchText: '',
+    }
+
+    public render(): JSX.Element {
+        const {messages} = this.props;
+
+
+        return (
+            <div className='message-list'>
+                <input
+                    type={'search'}
+                    placeholder="Искать сообщение"
+                    value={this.state.searchText}
+                    onChange={event => this.setState({ searchText: event.target.value })}
+                />
+                {/*<input type="submit" value="Найти" className='message-search'/>*/}
+
+
+                {messages && messages.map(message => (
+                    <Message
+                        outcomming={message.outcomming}
+                        text={message.text}
+                        searchText={this.state.searchText}
+                    />
+                ))}
+            </div>
+        )
+    }
 }

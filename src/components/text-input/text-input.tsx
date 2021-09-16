@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { ChangeEvent } from 'react';
 
 import './text-input.css';
 
 interface Props {
   value: string;
-  onChange: (event: React.ChangeEvent) => void;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export class TextInput extends React.Component<Props> {
