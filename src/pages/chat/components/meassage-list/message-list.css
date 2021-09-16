@@ -37,3 +37,7 @@
   font-size: 14pt;
   margin: 10px;
 }
+.found  span{
+  background-color: #bf9d9d;
+  border-radius: 8px;
+}

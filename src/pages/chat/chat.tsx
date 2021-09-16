@@ -56,7 +56,7 @@ export class ChatPage extends React.Component<{}, State> {
     }
 
     const updatedChats = chats.slice();
-    updatedChats[currentChatIndex].messages.push({ outcomming: true, text});
+    updatedChats[currentChatIndex].messages.push({ outcomming: true, text, found: false });
     
     this.setState({ chats: updatedChats })
   }

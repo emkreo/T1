@@ -1,30 +1,25 @@
 import * as React from 'react';
 import { Text } from '../../../../components';
-import Highlighter from "react-highlight-words";
 
 
 interface Props {
   text: string;
   outcomming: boolean;
-  valueInput: string
+  found: boolean
 }
 
 export class Message extends React.Component<Props> {
   public render(): JSX.Element {
-    const { text, outcomming, valueInput} = this.props;
+    const { text, outcomming, found} = this.props;
     
     const className = `message message--${outcomming ? 'outcomming' : 'incomming' }`
-
+    const Found = ' found';
     return (
-      <div className={className}>
+      <div className={found ? className+Found:className}>
+
         <div className='message-text'>
           <Text>
-            <Highlighter
-              highlightClassName="highlight"
-              searchWords={[valueInput]}
-              autoEscape={true}
-              textToHighlight={text}
-          />
+            {text}
           </Text>
         </div>
       </div>

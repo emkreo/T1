@@ -6,6 +6,7 @@ export interface ChatInfo {
 export interface ChatMessage {
   text: string;
   outcomming: boolean;
+  found: boolean
 }
 
 export interface Chat {
