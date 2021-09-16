@@ -22,7 +22,18 @@
   text-align: end;
   flex-direction: row-reverse;
 }
+.highlight{
+  background: #c3baba;
+}
 
 .message--outcomming > .message-text {
   background-color: seagreen;
+}
+.message-list input{
+  max-width: 400px;
+  min-width: 95%;
+  max-height: 30px;
+  min-height: 30px;
+  font-size: 14pt;
+  margin: 10px;
 }

@@ -36,7 +36,6 @@ export class MessageEditor extends React.Component<Props, State> {
 
     @autobind
     private onMessageChange(event: any): void {
-        console.log(event);
 
         event.target.value.length !== 0
             ? this.setState({message: event.target.value, disabled: false})

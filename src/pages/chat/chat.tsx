@@ -5,7 +5,7 @@ import './chat.css'
 
 import { ChatList, MessageEditor, MessageList } from './components';
 import { InitialData } from '../../initial-data';
-import { Chat } from '../../interfaces/chat';
+import {Chat} from '../../interfaces/chat';
 
 
 interface State {
@@ -14,13 +14,16 @@ interface State {
 }
 
 export class ChatPage extends React.Component<{}, State> {
+
   constructor(props: {}) {
     super(props);
     this.state = InitialData;
   }
 
   public render(): JSX.Element {
+
     const { chats, selectdChatId } = this.state;
+
     const messages = chats.find(x => x.info.id === selectdChatId)?.messages || [];
     
 
@@ -41,7 +44,7 @@ export class ChatPage extends React.Component<{}, State> {
 
   @autobind
   private selectChat(selectdChatId: number): void {
-    this.setState({ selectdChatId })
+    this.setState({ selectdChatId: selectdChatId !== this.state.selectdChatId ? selectdChatId : 0 })
   }
 
   @autobind
@@ -53,7 +56,7 @@ export class ChatPage extends React.Component<{}, State> {
     }
 
     const updatedChats = chats.slice();
-    updatedChats[currentChatIndex].messages.push({ outcomming: true, text });
+    updatedChats[currentChatIndex].messages.push({ outcomming: true, text});
     
     this.setState({ chats: updatedChats })
   }
