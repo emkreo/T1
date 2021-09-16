@@ -1,5 +1,10 @@
 .app {
   text-align: center;
+  font-size: 14pt;
+}
+.active{
+  text-align: center;
+  font-size: 28pt;
 }
 
 .app-logo {
@@ -17,14 +22,14 @@
   background-color: #282c34;
   height: 80px;
   display: flex;
-  font-size: 14pt;
+  justify-content: space-between;
+  align-items: center;
   color: white;
 }
 
 .app-content {
   background-color: #eee;
   height: calc(100% - 80px);
-  font-size: 14pt;
   color: black;
 }
 
