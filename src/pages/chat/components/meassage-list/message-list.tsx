@@ -20,6 +20,7 @@ export class MessageList extends React.Component<Props, State> {
             valueInput: ''
         }
     }
+
     onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
         this.setState({valueInput: e.currentTarget.value})
     }
@@ -36,14 +37,14 @@ export class MessageList extends React.Component<Props, State> {
                     value={this.state.valueInput}
                 />
                 {
-                this.props.messages && this.props.messages.map(message => (
-                    <Message
-                        outcomming={message.outcomming}
-                        text={message.text}
-                        valueInput={this.state.valueInput}
-                    />
-                ))
-
+                    this.props.messages && this.props.messages.map(message => (
+                        <Message
+                            key={message.text}
+                            outcomming={message.outcomming}
+                            text={message.text}
+                            valueInput={this.state.valueInput}
+                        />
+                    ))
                 }
             </div>
         )
