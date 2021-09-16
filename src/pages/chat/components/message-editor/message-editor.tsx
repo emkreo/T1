@@ -4,6 +4,7 @@ import * as React from 'react';
 import './message-editor.css'
 
 import { TextInput, Button } from '../../../../components';
+import {ChangeEvent} from "react";
 
 
 
@@ -15,6 +16,7 @@ interface State {
   message: string;
 }
 
+
 export class MessageEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -24,16 +26,17 @@ export class MessageEditor extends React.Component<Props, State> {
   }
   
   public render(): JSX.Element {
+
     return (
       <div className='message-editor'>
         <TextInput value={this.state.message} onChange={this.onMessageChange}/>
-        <Button text='Send Message' onClick={this.sendMessage} />
+        <Button text='Send Message' onClick={this.sendMessage} disabled={this.state.message}/>
       </div>
     )
   }
 
   @autobind
-  private onMessageChange(event: any): void {
+  private onMessageChange(event: ChangeEvent<HTMLTextAreaElement>): void {
     console.log(event);
     this.setState({ message: event.target.value });
   }

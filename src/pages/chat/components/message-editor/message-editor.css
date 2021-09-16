@@ -10,3 +10,7 @@
 .message-editor > .button {
   margin: 0 10px;
 }
+
+.message-editor.button--disabled{
+  opacity: 0.5;
+}
