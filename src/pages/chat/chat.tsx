@@ -47,7 +47,7 @@ export class ChatPage extends React.Component<{}, State> {
   }
 
   @autobind
-  searchText(inputText: string) {
+  private searchText(inputText: string) {
     if (inputText) {
       this.messages.forEach(el => {
         if (el.text.indexOf(inputText) !== -1) {
